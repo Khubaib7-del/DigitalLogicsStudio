@@ -53,82 +53,82 @@ const BitExtension = () => {
       title="Bit Extension"
       subtitle="Compare unsigned zero‑extension vs signed two's‑complement sign extension"
     >
-        <ControlPanel>
-          <ControlGroup label="Binary value">
-            <input
-              type="text"
-              className="control-input"
-              value={binary}
-              onChange={(e) => {
-                const val = e.target.value.replace(/\s+/g, '');
-                if (val === '' || /^[01]+$/.test(val)) {
-                  setBinary(val);
-                }
-              }}
-              placeholder="e.g. 1010"
-            />
-          </ControlGroup>
- 
-          <ControlGroup label="Target bit‑width">
-            <input
-              type="number"
-              className="control-input"
-              value={bits}
-              onChange={(e) => setBits(e.target.value)}
-              min="1"
-              max="32"
-            />
-          </ControlGroup>
- 
-          <ControlGroup label="Mode">
-            <select
-              className="control-select"
-              value={mode}
-              onChange={(e) => setMode(e.target.value)}
-            >
-              <option value="signed">Signed (two&apos;s complement)</option>
-              <option value="unsigned">Unsigned (zero‑extension)</option>
-            </select>
-          </ControlGroup>
-        </ControlPanel>
+      <ControlPanel>
+        <ControlGroup label="Binary value">
+          <input
+            type="text"
+            className="control-input"
+            value={binary}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\s+/g, '');
+              if (val === '' || /^[01]+$/.test(val)) {
+                setBinary(val);
+              }
+            }}
+            placeholder="e.g. 1010"
+          />
+        </ControlGroup>
 
-        {hasInput && (
-          <ResultCard title="Extension Result">
+        <ControlGroup label="Target bit‑width">
+          <input
+            type="number"
+            className="control-input"
+            value={bits}
+            onChange={(e) => setBits(e.target.value)}
+            min="1"
+            max="32"
+          />
+        </ControlGroup>
 
-              <ExplanationBlock title="How the bits change">
-                {result && result.error && (
-                  <p className="explanation-intro">
-                    <span className="highlight">Error:</span> {result.error}
-                  </p>
-                )}
-                {result && !result.error && (
-                  <>
-                    <p className="explanation-intro">
-                      <span className="highlight">Original:</span> {result.original} ({result.original.length} bits)
-                    </p>
-                    <p className="explanation-intro">
-                      <span className="highlight">Extended:</span> {result.extended} ({bits} bits)
-                    </p>
-                    <p>{result.explanation}</p>
-                  </>
-                )}
-              </ExplanationBlock>
+        <ControlGroup label="Mode">
+          <select
+            className="control-select"
+            value={mode}
+            onChange={(e) => setMode(e.target.value)}
+          >
+            <option value="signed">Signed (two&apos;s complement)</option>
+            <option value="unsigned">Unsigned (zero‑extension)</option>
+          </select>
+        </ControlGroup>
+      </ControlPanel>
 
-              <ExplanationBlock title="Signed vs unsigned intuition">
-                <>
-                  <p>
-                    With <span className="highlight">unsigned</span> numbers, the leftmost bit is just another
-                    magnitude bit, so new bits must be <strong>0</strong> to avoid changing the value.
-                  </p>
-                  <p>
-                    With <span className="highlight">two&apos;s‑complement signed</span> numbers, the leftmost bit
-                    encodes the sign. Repeating it into new higher‑order bits keeps the encoded integer the same, even
-                    though the word size grows.
-                  </p>
-                </>
-              </ExplanationBlock>
-          </ResultCard>
-        )}
+      {hasInput && (
+        <ResultCard title="Extension Result">
+
+          <ExplanationBlock title="How the bits change">
+            {result && result.error && (
+              <p className="explanation-intro">
+                <span className="highlight">Error:</span> {result.error}
+              </p>
+            )}
+            {result && !result.error && (
+              <>
+                <p className="explanation-intro">
+                  <span className="highlight">Original:</span> {result.original} ({result.original.length} bits)
+                </p>
+                <p className="explanation-intro">
+                  <span className="highlight">Extended:</span> {result.extended} ({bits} bits)
+                </p>
+                <p>{result.explanation}</p>
+              </>
+            )}
+          </ExplanationBlock>
+
+          <ExplanationBlock title="Signed vs unsigned intuition">
+            <>
+              <p className="explanation-intro">
+                With <span className="highlight">unsigned</span> numbers, the leftmost bit is just another
+                magnitude bit, so new bits must be <strong>0</strong> to avoid changing the value.
+              </p>
+              <p className="explanation-intro">
+                With <span className="highlight">two&apos;s‑complement signed</span> numbers, the leftmost bit
+                encodes the sign. Repeating it into new higher‑order bits keeps the encoded integer the same, even
+                though the word size grows.
+              </p>
+            </>
+          </ExplanationBlock>
+        </ResultCard>
+      )}
     </ToolLayout>
   );
 };

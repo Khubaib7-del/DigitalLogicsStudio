@@ -27,7 +27,8 @@ const Home = () => {
             <Link to="/ascii-notation" className="home-nav-link">ASCII</Link>
             <Link to="/bit-extension" className="home-nav-link">Bit Extension</Link>
             <Link to="/kmapgenerator" className="home-nav-link">K‑Map Studio</Link>
-            <Link to="/book" className="home-nav-link">Book Problems</Link>
+            <Link to="/book" className="home-nav-link">Book Ch1</Link>
+            <Link to="/book/ch2" className="home-nav-link">Book Ch2</Link>
           </nav>
         </div>
       </header>
@@ -162,7 +163,10 @@ const Home = () => {
             </p>
             <div className="home-card-links">
               <Link to="/book" className="home-card-link">
-                Book Problems
+                Book Ch1 Problems
+              </Link>
+              <Link to="/book/ch2" className="home-card-link">
+                Book Ch2 Problems
               </Link>
               <Link to="/timing-diagrams" className="home-card-link">
                 Timing Diagrams

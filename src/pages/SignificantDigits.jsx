@@ -78,59 +78,59 @@ const SignificantDigits = () => {
       title="Significant Digits Explorer"
       subtitle="Count significant figures, MSD, and LSD for any number"
     >
-        <ControlPanel>
-          <ControlGroup label="Enter a number">
-            <input
-              type="text"
-              className="control-input"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Examples: 0.004500 , 1200 , 3.40 , 6.02e23"
-            />
-          </ControlGroup>
-        </ControlPanel>
+      <ControlPanel>
+        <ControlGroup label="Enter a number">
+          <input
+            type="text"
+            className="control-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Examples: 0.004500 , 1200 , 3.40 , 6.02e23"
+          />
+        </ControlGroup>
+      </ControlPanel>
 
-        {input && (
-          <ResultCard title="Significant Digit Analysis">
+      {input && (
+        <ResultCard title="Significant Digit Analysis">
 
-              <ExplanationBlock title="Result Summary">
-                {result.count === 0 ? (
-                  <p className="explanation-intro">
-                    <span className="highlight">The input does not contain any significant digits</span> under standard
-                    conventions. Check the format and try again.
-                  </p>
-                ) : (
-                  <>
-                    <p className="explanation-intro">
-                      <span className="highlight">Total significant digits:</span> {result.count}
-                    </p>
-                    <p>
-                      <span className="highlight">Most Significant Digit (MSD):</span>{' '}
-                      {result.msd}
-                    </p>
-                    <p>
-                      <span className="highlight">Least Significant Digit (LSD):</span>{' '}
-                      {result.lsd}
-                    </p>
-                    <p>
-                      We strip off non-significant leading and trailing zeros and focus on the{' '}
-                      <span className="highlight">meaningful digits</span> that affect the measured precision.
-                    </p>
-                  </>
-                )}
-              </ExplanationBlock>
+          <ExplanationBlock title="Result Summary">
+            {result.count === 0 ? (
+              <p className="explanation-intro">
+                <span className="highlight">The input does not contain any significant digits</span> under standard
+                conventions. Check the format and try again.
+              </p>
+            ) : (
+              <>
+                <p className="explanation-intro">
+                  <span className="highlight">Total significant digits:</span> {result.count}
+                </p>
+                <p className="explanation-intro">
+                  <span className="highlight">Most Significant Digit (MSD):</span>{' '}
+                  {result.msd}
+                </p>
+                <p className="explanation-intro">
+                  <span className="highlight">Least Significant Digit (LSD):</span>{' '}
+                  {result.lsd}
+                </p>
+                <p className="explanation-intro">
+                  We strip off non-significant leading and trailing zeros and focus on the{' '}
+                  <span className="highlight">meaningful digits</span> that affect the measured precision.
+                </p>
+              </>
+            )}
+          </ExplanationBlock>
 
-              <ExplanationBlock title="Quick Rules">
-                <ul>
-                  <li>All non‑zero digits are always significant.</li>
-                  <li>Zeros between non‑zero digits are significant (e.g. 1005 → 4 sig. digits).</li>
-                  <li>Leading zeros are never significant (e.g. 0.0034 → 2 sig. digits).</li>
-                  <li>Trailing zeros after a decimal point are significant (e.g. 2.300 → 4 sig. digits).</li>
-                  <li>In scientific notation, only digits in the coefficient count as significant.</li>
-                </ul>
-              </ExplanationBlock>
-          </ResultCard>
-        )}
+          <ExplanationBlock title="Quick Rules">
+            <ul>
+              <li>All non‑zero digits are always significant.</li>
+              <li>Zeros between non‑zero digits are significant (e.g. 1005 → 4 sig. digits).</li>
+              <li>Leading zeros are never significant (e.g. 0.0034 → 2 sig. digits).</li>
+              <li>Trailing zeros after a decimal point are significant (e.g. 2.300 → 4 sig. digits).</li>
+              <li>In scientific notation, only digits in the coefficient count as significant.</li>
+            </ul>
+          </ExplanationBlock>
+        </ResultCard>
+      )}
     </ToolLayout>
   );
 };

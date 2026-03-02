@@ -14,19 +14,19 @@ const CircuitCost = () => {
     try {
       // Remove spaces and convert to uppercase
       const expr = expression.replace(/\s+/g, '').toUpperCase();
-      
+
       // Count literals (variables and their complements)
       let literalCount = 0;
       const variables = new Set();
-      
+
       for (let i = 0; i < expr.length; i++) {
         const char = expr[i];
         if (/[A-Z]/.test(char)) {
           variables.add(char);
-          if (i > 0 && expr[i-1] === "'") {
+          if (i > 0 && expr[i - 1] === "'") {
             // Complemented variable
             literalCount++;
-          } else if (i < expr.length - 1 && expr[i+1] === "'") {
+          } else if (i < expr.length - 1 && expr[i + 1] === "'") {
             // Variable that will be complemented
             literalCount++;
           } else {
@@ -35,14 +35,14 @@ const CircuitCost = () => {
           }
         }
       }
-      
+
       const result = {
         expression: expression,
         literalCount: literalCount,
         uniqueVariables: variables.size,
         variables: Array.from(variables).sort().join(', ')
       };
-      
+
       setLiteralCostResult(
         `Expression: ${result.expression}\n` +
         `Literal Cost: ${result.literalCount}\n` +
@@ -61,15 +61,15 @@ const CircuitCost = () => {
   const calculateGateInputCost = (expression) => {
     try {
       const expr = expression.replace(/\s+/g, '').toUpperCase();
-      
+
       // Count operators and their inputs
       let gateInputCount = 0;
       let currentGateInputs = 0;
       let inParentheses = 0;
-      
+
       for (let i = 0; i < expr.length; i++) {
         const char = expr[i];
-        
+
         if (char === '(') {
           inParentheses++;
         } else if (char === ')') {
@@ -81,7 +81,7 @@ const CircuitCost = () => {
         } else if (/[A-Z]/.test(char)) {
           currentGateInputs++;
           // Skip complement if present
-          if (i < expr.length - 1 && expr[i+1] === "'") {
+          if (i < expr.length - 1 && expr[i + 1] === "'") {
             i++;
           }
         } else if (char === '+' || char === '·' || char === '*') {
@@ -91,18 +91,18 @@ const CircuitCost = () => {
           }
         }
       }
-      
+
       // Add remaining inputs
       if (currentGateInputs > 0) {
         gateInputCount += currentGateInputs;
       }
-      
+
       // Count gates
       const andGates = (expr.match(/[+]/g) || []).length;
       const orGates = (expr.match(/[·*]/g) || []).length;
       const notGates = (expr.match(/'/g) || []).length;
       const totalGates = andGates + orGates + notGates;
-      
+
       setGateInputCostResult(
         `Expression: ${expression}\n` +
         `Gate Input Cost: ${gateInputCount}\n` +
@@ -123,20 +123,12 @@ const CircuitCost = () => {
   const gateInputExample = "F = (A·B) + (C·D')";
 
   return (
-    <ToolLayout 
-      title="Circuit Cost Analysis" 
+    <ToolLayout
+      title="Circuit Cost Analysis"
       subtitle="Understand literal cost and gate input cost for Boolean expressions"
     >
-      <div className="kmap-card" style={{ marginBottom: '1rem' }}>
-        <button
-          className="kmap-btn kmap-btn-primary kmap-btn-full"
-          onClick={() => setOpen(true)}
-        >
-          🔌 Experiment with Circuit
-        </button>
-      </div>
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="What is Circuit Cost?"
         intro="Circuit cost helps us understand the complexity and efficiency of Boolean expressions. Two main metrics are used:"
       >
@@ -144,7 +136,7 @@ const CircuitCost = () => {
           <div className="cost-type">
             <h4>Literal Cost</h4>
             <p>
-              The total number of variable occurrences (both complemented and non-complemented) 
+              The total number of variable occurrences (both complemented and non-complemented)
               in a Boolean expression. Each literal represents one input to a gate.
             </p>
             <div className="cost-example">
@@ -157,7 +149,7 @@ const CircuitCost = () => {
           <div className="cost-type">
             <h4>Gate Input Cost</h4>
             <p>
-              The total number of inputs to all gates in the circuit. This includes inputs 
+              The total number of inputs to all gates in the circuit. This includes inputs
               to AND, OR, NOT, NAND, NOR, XOR, and XNOR gates.
             </p>
             <div className="cost-example">
@@ -175,7 +167,7 @@ const CircuitCost = () => {
         </div>
       </ExplanationBlock>
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="Disadvantages of Literal Cost"
         intro="While literal cost is simple to calculate, it has several limitations:"
       >
@@ -183,7 +175,7 @@ const CircuitCost = () => {
           <div className="disadvantage-item">
             <h4>❌ Ignores Gate Complexity</h4>
             <p>
-              Literal cost treats all literals equally, but different gates have different 
+              Literal cost treats all literals equally, but different gates have different
               implementation complexities. A 3-input AND gate is more complex than a 2-input AND gate.
             </p>
           </div>
@@ -191,7 +183,7 @@ const CircuitCost = () => {
           <div className="disadvantage-item">
             <h4>❌ No Technology Consideration</h4>
             <p>
-              Different logic families (TTL, CMOS, etc.) have different cost structures. 
+              Different logic families (TTL, CMOS, etc.) have different cost structures.
               NAND gates might be cheaper in some technologies, but literal cost doesn't account for this.
             </p>
           </div>
@@ -199,7 +191,7 @@ const CircuitCost = () => {
           <div className="disadvantage-item">
             <h4>❌ Doesn't Reflect Propagation Delay</h4>
             <p>
-              Expressions with the same literal cost can have very different timing characteristics. 
+              Expressions with the same literal cost can have very different timing characteristics.
               More gate levels generally mean longer propagation delays.
             </p>
           </div>
@@ -207,7 +199,7 @@ const CircuitCost = () => {
           <div className="disadvantage-item">
             <h4>❌ Limited Optimization Insight</h4>
             <p>
-              Literal cost alone doesn't always indicate which expression is more optimal. 
+              Literal cost alone doesn't always indicate which expression is more optimal.
               Sometimes a higher literal cost expression might be better for specific implementations.
             </p>
           </div>
@@ -234,7 +226,7 @@ const CircuitCost = () => {
         example={gateInputExample}
       />
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="Comparison and Best Practices"
         intro="Understanding both cost metrics helps in circuit optimization:"
       >

@@ -18,18 +18,6 @@ const UniversalGates = () => {
     { expression: 'F = (A + B)·(C\' + D)', hint: 'Hint: Handle complement and distribution' }
   ];
 
-  const calculateGateOutput = (gateType, inputs) => {
-    const values = Object.values(inputs);
-    
-    switch (gateType) {
-      case 'NAND':
-        return !(values[0] && values[1]);
-      case 'NOR':
-        return !(values[0] || values[1]);
-      default:
-        return false;
-    }
-  };
 
   const handleInputChange = (inputs) => {
     // This will be called when demo inputs change
@@ -76,8 +64,8 @@ const UniversalGates = () => {
   const currentGate = gateImplementations[selectedGate];
 
   return (
-    <ToolLayout 
-      title="Universal Gates" 
+    <ToolLayout
+      title="Universal Gates"
       subtitle="Deep dive into NAND and NOR gates - the building blocks of all digital logic"
     >
       <div className="kmap-card" style={{ marginBottom: '1rem' }}>
@@ -89,7 +77,7 @@ const UniversalGates = () => {
         </button>
       </div>
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="What are Universal Gates?"
         intro="Universal gates are special logic gates that can be used to implement any Boolean function without using any other gate types."
       >
@@ -132,7 +120,7 @@ const UniversalGates = () => {
         truthTableData={currentGate.truthTable}
       />
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="Universal Property Demonstrations"
         intro="See how universal gates can implement all other basic logic gates:"
       >
@@ -155,7 +143,7 @@ const UniversalGates = () => {
         </div>
       </ExplanationBlock>
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="Why Universal Gates Matter"
         intro="Universal gates are fundamental to digital circuit design for several important reasons:"
       >
@@ -163,7 +151,7 @@ const UniversalGates = () => {
           <div className="importance-item">
             <h4>🏭 Manufacturing Efficiency</h4>
             <p>
-              Manufacturing plants can focus on producing only one type of gate, 
+              Manufacturing plants can focus on producing only one type of gate,
               reducing complexity and cost while maintaining the ability to create any logic circuit.
             </p>
           </div>
@@ -171,7 +159,7 @@ const UniversalGates = () => {
           <div className="importance-item">
             <h4>🔧 Design Simplicity</h4>
             <p>
-              Circuit designers can standardize on a single gate type, making 
+              Circuit designers can standardize on a single gate type, making
               design rules, testing, and optimization more straightforward.
             </p>
           </div>
@@ -179,7 +167,7 @@ const UniversalGates = () => {
           <div className="importance-item">
             <h4>⚡ Performance Optimization</h4>
             <p>
-              Different logic families have different characteristics. TTL logic 
+              Different logic families have different characteristics. TTL logic
               favors NAND gates, while CMOS logic works well with both NAND and NOR.
             </p>
           </div>
@@ -187,14 +175,14 @@ const UniversalGates = () => {
           <div className="importance-item">
             <h4>📚 Educational Value</h4>
             <p>
-              Understanding universal gates helps students grasp the fundamental 
+              Understanding universal gates helps students grasp the fundamental
               nature of Boolean logic and how complex functions are built from simple operations.
             </p>
           </div>
         </div>
       </ExplanationBlock>
 
-      <ExplanationBlock 
+      <ExplanationBlock
         title="Interactive Activities"
         intro="Try these hands-on exercises to master universal gates:"
       >
@@ -202,7 +190,7 @@ const UniversalGates = () => {
           <div className="activity-card">
             <h4>🎯 Activity 1: Build Basic Gates</h4>
             <p>
-              Using only NAND gates, try to build AND, OR, and NOT gates. 
+              Using only NAND gates, try to build AND, OR, and NOT gates.
               Then verify your implementations using the truth tables.
             </p>
             <div className="activity-steps">

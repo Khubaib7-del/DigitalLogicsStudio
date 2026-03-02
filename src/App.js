@@ -15,6 +15,7 @@ import NumberConverter from './pages/NumberConversation';
 import NumberSystemCalculator from './pages/NumberSystemCalculator';
 import BinaryRepresentation from './pages/BinaryRepresentation';
 import ProblemSolver from './pages/Book/Ch1';
+import Ch2ProblemSolver from './pages/Book/Ch2';
 import BitConverter from './pages/Bitconverter';
 import ParityBitCalculator from './pages/ParityBitCalculator';
 import KMapGenerator from './pages/KmapGenerator';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/ascii-notation" element={<ASCIINotation />} />
           <Route path="/bit-extension" element={<BitExtension />} />
           <Route path="/book" element={<ProblemSolver />} />
+                    <Route path="/book/ch2" element={<Ch2ProblemSolver />} />
           <Route path="/numberconversation" element={<NumberConverter />} />
           <Route path="/numbersystemcalculator" element={<NumberSystemCalculator />} />
           <Route path="/binaryrepresentation" element={<BinaryRepresentation />} />
