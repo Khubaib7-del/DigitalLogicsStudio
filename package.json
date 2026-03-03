@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
     "cors": "^2.8.5",
+    "dld-books": "^1.0.1",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "lucide-react": "^0.563.0",
