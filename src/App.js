@@ -1,39 +1,43 @@
-import './App.css';
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // PAGES:
-import Home from './pages/Home';
-import Boolforge from './pages/Boolforge';
-import SignificantDigits from './pages/SignificantDigits';
-import BCDNotation from './pages/BCDNotation';
-import ASCIINotation from './pages/ASCIINotation';
-import BitExtension from './pages/BitExtension';
+import Home from "./pages/Home";
+import Boolforge from "./pages/Boolforge";
+import SignificantDigits from "./pages/SignificantDigits";
+import BCDNotation from "./pages/BCDNotation";
+import ASCIINotation from "./pages/ASCIINotation";
+import BitExtension from "./pages/BitExtension";
 
 // UTILS / OTHER TOOLS:
-import ScrollToTop from './utils/ScrollToTop';
-import NumberConverter from './pages/NumberConversation';
-import NumberSystemCalculator from './pages/NumberSystemCalculator';
-import BinaryRepresentation from './pages/BinaryRepresentation';
-import ProblemSolver from './pages/Book/Ch1';
-import Ch2ProblemSolver from './pages/Book/Ch2';
-import BitConverter from './pages/Bitconverter';
-import ParityBitCalculator from './pages/ParityBitCalculator';
-import KMapGenerator from './pages/KmapGenerator';
-import GateExplanation from './pages/GateExplanation';
-import TimeDiagrams from './pages/TimeDiagrams';
-import BooleanAlgebraOverview from './pages/BooleanAlgebraOverview';
-import BooleanIdentities from './pages/BooleanIdentities';
-import DualityPrinciple from './pages/DualityPrinciple';
-import BooleanLaws from './pages/BooleanLaws';
-import ConsensusTheorem from './pages/ConsensusTheorem';
-import ComplementPage from './pages/ComplementPage';
-import StandardForms from './pages/StandardForms';
-import MintermsPage from './pages/MintermsPage';
-import MaxtermsPage from './pages/MaxtermsPage';
-import MintermsMaxtermsRelation from './pages/MintermsMaxtermsRelation';
-import CircuitCost from './pages/CircuitCost';
-import UniversalGates from './pages/UniversalGates';
-import OddFunction from './pages/OddFunction';
+import ScrollToTop from "./utils/ScrollToTop";
+import NumberConverter from "./pages/NumberConversation";
+import NumberSystemCalculator from "./pages/NumberSystemCalculator";
+import BinaryRepresentation from "./pages/BinaryRepresentation";
+import ProblemSolver from "./pages/Book/Ch1";
+import Ch2ProblemSolver from "./pages/Book/Ch2";
+import BitConverter from "./pages/Bitconverter";
+import ParityBitCalculator from "./pages/ParityBitCalculator";
+import KMapGenerator from "./pages/KmapGenerator";
+import GateExplanation from "./pages/GateExplanation";
+import TimeDiagrams from "./pages/TimeDiagrams";
+import BooleanAlgebraOverview from "./pages/BooleanAlgebraOverview";
+import BooleanIdentities from "./pages/BooleanIdentities";
+import DualityPrinciple from "./pages/DualityPrinciple";
+import BooleanLaws from "./pages/BooleanLaws";
+import ConsensusTheorem from "./pages/ConsensusTheorem";
+import ComplementPage from "./pages/ComplementPage";
+import StandardForms from "./pages/StandardForms";
+import MintermsPage from "./pages/MintermsPage";
+import MaxtermsPage from "./pages/MaxtermsPage";
+import MintermsMaxtermsRelation from "./pages/MintermsMaxtermsRelation";
+import CircuitCost from "./pages/CircuitCost";
+import UniversalGates from "./pages/UniversalGates";
+import OddFunction from "./pages/OddFunction";
+
+// COMBINATIONAL CIRCUITS:
+import EncoderPage from "./pages/EncoderPage";
+import DecoderPage from "./pages/DecoderPage";
 
 function App() {
   return (
@@ -48,11 +52,20 @@ function App() {
           <Route path="/ascii-notation" element={<ASCIINotation />} />
           <Route path="/bit-extension" element={<BitExtension />} />
           <Route path="/book" element={<ProblemSolver />} />
-                    <Route path="/book/ch2" element={<Ch2ProblemSolver />} />
+          <Route path="/book/ch2" element={<Ch2ProblemSolver />} />
           <Route path="/numberconversation" element={<NumberConverter />} />
-          <Route path="/numbersystemcalculator" element={<NumberSystemCalculator />} />
-          <Route path="/binaryrepresentation" element={<BinaryRepresentation />} />
-          <Route path="/paritybitcalculator" element={<ParityBitCalculator />} />
+          <Route
+            path="/numbersystemcalculator"
+            element={<NumberSystemCalculator />}
+          />
+          <Route
+            path="/binaryrepresentation"
+            element={<BinaryRepresentation />}
+          />
+          <Route
+            path="/paritybitcalculator"
+            element={<ParityBitCalculator />}
+          />
           <Route path="/bitconvertor" element={<BitConverter />} />
           <Route path="/kmapgenerator" element={<KMapGenerator />} />
           <Route path="/gates" element={<GateExplanation />} />
@@ -66,10 +79,17 @@ function App() {
           <Route path="/standard-forms" element={<StandardForms />} />
           <Route path="/minterms" element={<MintermsPage />} />
           <Route path="/maxterms" element={<MaxtermsPage />} />
-          <Route path="/minterms-maxterms" element={<MintermsMaxtermsRelation />} />
+          <Route
+            path="/minterms-maxterms"
+            element={<MintermsMaxtermsRelation />}
+          />
           <Route path="/circuit-cost" element={<CircuitCost />} />
           <Route path="/universal-gates" element={<UniversalGates />} />
           <Route path="/odd-function" element={<OddFunction />} />
+
+          {/* Combinational Circuits */}
+          <Route path="/encoder" element={<EncoderPage />} />
+          <Route path="/decoder" element={<DecoderPage />} />
         </Routes>
       </BrowserRouter>
     </>

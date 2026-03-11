@@ -27,6 +27,8 @@ const Home = () => {
             <Link to="/ascii-notation" className="home-nav-link">ASCII</Link>
             <Link to="/bit-extension" className="home-nav-link">Bit Extension</Link>
             <Link to="/kmapgenerator" className="home-nav-link">K‑Map Studio</Link>
+            <Link to="/encoder" className="home-nav-link">Encoder</Link>
+            <Link to="/decoder" className="home-nav-link">Decoder</Link>
             <Link to="/book" className="home-nav-link">Book Ch1</Link>
             <Link to="/book/ch2" className="home-nav-link">Book Ch2</Link>
           </nav>
@@ -108,6 +110,19 @@ const Home = () => {
             </div>
           </article>
 
+          {/* Combinational Circuits Section — NEW */}
+          <article className="home-card">
+            <h3>🔀 Combinational Circuits</h3>
+            <p>
+              Explore encoders and decoders — the core combinational building blocks
+              used in memory systems, displays, keyboards, and interrupt controllers.
+            </p>
+            <div className="home-card-links">
+              <Link to="/encoder" className="home-card-link">Encoder</Link>
+              <Link to="/decoder" className="home-card-link">Decoder</Link>
+            </div>
+          </article>
+
           {/* Number Systems Section */}
           <article className="home-card">
             <h3>🔢 Number Systems</h3>
@@ -184,4 +199,3 @@ const Home = () => {
 };
 
 export default Home;
-
