@@ -6,6 +6,9 @@ import ControlGroup from "../../components/ControlGroup";
 import AFHDLSection from "./components/AFHDLSection";
 import AFHDLCard from "./components/AFHDLCard";
 import AFHDLToggle from "./components/AFHDLToggle";
+import AFHDLDataRow from "./components/AFHDLDataRow";
+import AFHDLActionRow from "./components/AFHDLActionRow";
+import AFHDLStepList from "./components/AFHDLStepList";
 import { arithmeticDescriptions } from "./utils/arithmeticDescriptions";
 import {
   cleanBin,
@@ -19,6 +22,15 @@ const BinaryAdders = () => {
   const [b, setB] = useState("0101");
   const [cin, setCin] = useState("0");
   const [showSteps, setShowSteps] = useState(false);
+  const [showTruthTable, setShowTruthTable] = useState(false);
+  const [selectedExample, setSelectedExample] = useState("1010,0101,0");
+
+  const examples = [
+    { label: "Simple", a: "1010", b: "0101", cin: "0" },
+    { label: "Carry path", a: "1111", b: "0001", cin: "0" },
+    { label: "With carry in", a: "1101", b: "1011", cin: "1" },
+    { label: "Zero edge", a: "0000", b: "0000", cin: "0" },
+  ];
 
   const h = halfAdder(a.slice(-1), b.slice(-1));
   const f = fullAdder(a.slice(-1), b.slice(-1), cin);
@@ -37,9 +49,26 @@ const BinaryAdders = () => {
       <ExplanationBlock title="What is an Adder?">
         <p>
           Binary adders compute sum and carry bits for digital circuits. Start
-          with half adder and full adder, then build a ripple carry chain. Carry
-          Lookahead Adder (CLA) reduces delay by precomputing generate and
-          propagate signals.
+          with half adder and full adder, then build a ripple carry chain.
+        </p>
+        <ul>
+          <li>Half adder: adds two bits A and B, produces sum and carry.</li>
+          <li>
+            Full adder: adds A, B, and carry-in (Cin), produces sum and
+            carry-out.
+          </li>
+          <li>
+            Ripple carry: result chain where each stage waits for previous
+            carry.
+          </li>
+          <li>
+            CLA speed-up: generate (Gi=A&B) and propagate (Pi=A^B) signal logic.
+          </li>
+        </ul>
+        <p>
+          Practice with different inputs using example buttons and see how
+          carries move through the adder, plus the LSB truth table for hands-on
+          learning.
         </p>
       </ExplanationBlock>
 
@@ -68,30 +97,74 @@ const BinaryAdders = () => {
         </ControlGroup>
       </ControlPanel>
 
-      <AFHDLCard
-        title="Adder results"
-        subtitle="Half adder, full adder, and ripple-carry outputs"
+      <div
+        className="arithmetic-card"
+        style={{ display: "grid", gap: "0.8rem" }}
       >
-        <p>
-          Half adder (LSB): sum = {h.sum}, carry = {h.carry}
-        </p>
-        <p>
-          Full adder (LSB): sum = {f.sum}, carry = {f.carry}
-        </p>
-        <p>
-          Ripple carry adder result: sum = {ripple.sum}, carry out ={" "}
-          {ripple.carry}
-        </p>
-        <p>
-          CLA signals: generate = A&B, propagate = A^B; C[i+1]=G[i]+P[i]*C[i].
-        </p>
-      </AFHDLCard>
+        <AFHDLCard
+          title="Adder results"
+          subtitle="Half adder, full adder, and ripple-carry outputs"
+        >
+          <AFHDLDataRow label="Half adder (LSB) sum" value={h.sum} />
+          <AFHDLDataRow label="Half adder (LSB) carry" value={h.carry} />
+          <AFHDLDataRow label="Full adder (LSB) sum" value={f.sum} />
+          <AFHDLDataRow label="Full adder (LSB) carry" value={f.carry} />
+          <AFHDLDataRow label="Ripple full sum" value={ripple.sum} />
+          <AFHDLDataRow label="Ripple carry out" value={ripple.carry} />
+          <p style={{ marginTop: "0.6rem", fontStyle: "italic" }}>
+            CLA idea: generate = A&B, propagate = A^B; C[i+1]=G[i]+P[i]*C[i]
+          </p>
+        </AFHDLCard>
 
-      <AFHDLToggle
-        checked={showSteps}
-        label="Show step-by-step guide"
-        onChange={() => setShowSteps(!showSteps)}
-      />
+        <AFHDLActionRow>
+          {examples.map((entry) => (
+            <button
+              key={entry.label}
+              className="kmap-btn kmap-btn-secondary"
+              onClick={() => {
+                setA(entry.a);
+                setB(entry.b);
+                setCin(entry.cin);
+                setSelectedExample(`${entry.a},${entry.b},${entry.cin}`);
+              }}
+            >
+              {entry.label}
+            </button>
+          ))}
+        </AFHDLActionRow>
+
+        <AFHDLToggle
+          checked={showSteps}
+          label="Show step-by-step guide"
+          onChange={() => setShowSteps(!showSteps)}
+        />
+
+        <AFHDLToggle
+          checked={showTruthTable}
+          label="Show LSB truth table"
+          onChange={() => setShowTruthTable(!showTruthTable)}
+        />
+
+        {showTruthTable && (
+          <AFHDLCard
+            title="LSB truth table"
+            subtitle="Input a0 b0 cin => sum carry"
+          >
+            <AFHDLStepList
+              steps={[
+                "000 => sum 0 carry 0",
+                "001 => sum 1 carry 0",
+                "010 => sum 1 carry 0",
+                "011 => sum 0 carry 1",
+                "100 => sum 1 carry 0",
+                "101 => sum 0 carry 1",
+                "110 => sum 0 carry 1",
+                "111 => sum 1 carry 1",
+              ]}
+            />
+          </AFHDLCard>
+        )}
+      </div>
 
       {showSteps && (
         <AFHDLCard title="Step-by-step details">
