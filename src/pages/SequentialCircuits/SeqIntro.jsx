@@ -8,6 +8,7 @@ import SeqGridData from "./data/SeqGridData";
 import SeqBoxData from "./data/SeqBoxData";
 import SeqBoxInfo from "./components/SeqBoxInfo";
 import SeqBoxSuccess from "./components/SeqBoxSuccess";
+import SeqTableData from "./data/SeqTableData";
 
 const SeqIntro = () => (
   <SeqLayout
@@ -24,7 +25,7 @@ const SeqIntro = () => (
         allow the circuit to "remember" previous states.
       </p>
 
-      <SeqTable />
+      <SeqTable data={SeqTableData.sequentialcircuit} />
 
       <h2>General Model</h2>
       <p>Every sequential circuit has three fundamental parts:</p>

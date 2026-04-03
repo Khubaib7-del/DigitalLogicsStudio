@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SeqLayout from "./SeqLayout";
 import SeqBox from "./components/SeqBox";
 import SeqBoxData from "./data/SeqBoxData";
+import SeqTable from "./components/SeqTable";
+import SeqTableData from "./data/SeqTableData";
 
 const SRLatchSim = () => {
   const [S, setS] = useState(0);
@@ -135,49 +137,7 @@ const SeqLatches = () => (
         <strong>Q</strong> and <strong>Q̄</strong>.
       </p>
 
-      <div className="seq-table-wrap">
-        <table className="seq-table">
-          <thead>
-            <tr>
-              <th>S</th>
-              <th>R</th>
-              <th>Q (next)</th>
-              <th>Q̄ (next)</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>Q</td>
-              <td>Q̄</td>
-              <td>No change (memory)</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>0</td>
-              <td>1</td>
-              <td>0</td>
-              <td>Set</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>1</td>
-              <td>0</td>
-              <td>1</td>
-              <td>Reset</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>?</td>
-              <td>?</td>
-              <td>⚠ Forbidden</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <SeqTable data={SeqTableData.SRLatch} />
 
       <SRLatchSim />
 

@@ -1,44 +1,30 @@
-export default function SeqTable() {
+import React from "react";
+
+export default function SeqTable({ data }) {
+  if (!data) return null; // Handle empty data gracefully
+  const { headers, rows } = data;
+  const keys = headers.map((header) => header.toLowerCase());
+
   return (
-    <>
-      <div className="seq-table-wrap">
-        <table className="seq-table">
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Combinational</th>
-              <th>Sequential</th>
+    <div className="seq-table-wrap">
+      <table className="seq-table">
+        <thead>
+          <tr>
+            {headers.map((header, index) => (
+              <th key={index}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index}>
+              {keys.map((key, i) => (
+                <td key={i}>{row[key]}</td>
+              ))}
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Output depends on</td>
-              <td>Current inputs only</td>
-              <td>Inputs + stored state</td>
-            </tr>
-            <tr>
-              <td>Memory elements</td>
-              <td>None</td>
-              <td>Flip-flops / Latches</td>
-            </tr>
-            <tr>
-              <td>Feedback paths</td>
-              <td>No</td>
-              <td>Yes</td>
-            </tr>
-            <tr>
-              <td>Clock required</td>
-              <td>No (usually)</td>
-              <td>Yes (synchronous)</td>
-            </tr>
-            <tr>
-              <td>Examples</td>
-              <td>Adder, Mux, Decoder</td>
-              <td>Counter, Register, FSM</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
