@@ -4,7 +4,6 @@ import ExplanationBlock from "../../components/ExplanationBlock";
 import ControlPanel from "../../components/ControlPanel";
 import ControlGroup from "../../components/ControlGroup";
 import AFHDLSection from "./components/AFHDLSection";
-import AFHDLCopyButton from "./components/AFHDLCopyButton";
 import AFHDLCard from "./components/AFHDLCard";
 import { arithmeticDescriptions } from "./utils/arithmeticDescriptions";
 import { toTwosComplement, fromTwosComplement } from "./utils/bitOperations";

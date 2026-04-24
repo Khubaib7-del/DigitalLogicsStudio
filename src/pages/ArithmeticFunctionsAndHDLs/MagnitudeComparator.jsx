@@ -5,7 +5,6 @@ import ControlPanel from "../../components/ControlPanel";
 import ControlGroup from "../../components/ControlGroup";
 
 import AFHDLSection from "./components/AFHDLSection";
-import AFHDLCopyButton from "./components/AFHDLCopyButton";
 import { arithmeticDescriptions } from './utils/arithmeticDescriptions';
 import { cleanBin, compareMagnitude } from "../../utils/arithmeticHelpers";
 
