@@ -10,50 +10,63 @@
  */
 import React from "react";
 
-const ON_COLOR  = "#00ff88";
-const OFF_COLOR = "rgba(0,255,136,0.06)";
+import React from "react";
+import { COLORS } from "../../shared/theme.js";
 
 const SevenSeg = ({ segs }) => {
   // Helper: pick ON or OFF color for a named segment
-  const s = (name) => (segs[name] ? ON_COLOR : OFF_COLOR);
+  const isOn = (name) => !!segs[name];
 
-  const activeSegNames = ["a","b","c","d","e","f","g"].filter((k) => segs[k]);
+  const getFill = (name) => isOn(name) ? COLORS.high : "rgba(0, 255, 136, 0.04)";
+  const getFilter = (name) => isOn(name) ? `drop-shadow(0 0 8px ${COLORS.high}80)` : "none";
+
+  const activeSegNames = ["a", "b", "c", "d", "e", "f", "g"].filter((k) => segs[k]);
 
   return (
     <div style={{ textAlign: "center" }}>
       <svg
         viewBox="0 0 70 120"
-        width="90"
-        height="130"
-        style={{ filter: "drop-shadow(0 0 10px rgba(0,255,136,0.25))" }}
-      >
-        {/* a — top horizontal bar */}
-        <rect x="10" y="4"   width="50" height="9"  rx="4" fill={s("a")} />
-        {/* b — top-right vertical */}
-        <rect x="58" y="8"   width="9"  height="48" rx="4" fill={s("b")} />
-        {/* c — bottom-right vertical */}
-        <rect x="58" y="62"  width="9"  height="48" rx="4" fill={s("c")} />
-        {/* d — bottom horizontal bar */}
-        <rect x="10" y="107" width="50" height="9"  rx="4" fill={s("d")} />
-        {/* e — bottom-left vertical */}
-        <rect x="3"  y="62"  width="9"  height="48" rx="4" fill={s("e")} />
-        {/* f — top-left vertical */}
-        <rect x="3"  y="8"   width="9"  height="48" rx="4" fill={s("f")} />
-        {/* g — middle horizontal bar */}
-        <rect x="10" y="56"  width="50" height="9"  rx="4" fill={s("g")} />
-      </svg>
-
-      {/* Active segments label (for reference) */}
-      <div
+        width="100"
+        height="140"
         style={{
-          marginTop: "6px",
-          fontSize: "0.7rem",
-          color: "rgba(0,255,136,0.5)",
-          fontFamily: "monospace",
-          letterSpacing: "2px",
+          filter: "drop-shadow(0 0 12px rgba(0,255,136,0.15))",
+          transition: "all 0.3s ease"
         }}
       >
-        {activeSegNames.length > 0 ? activeSegNames.join("") : "–"}
+        {/* a — top horizontal bar */}
+        <rect x="12" y="5" width="46" height="8" rx="4" fill={getFill("a")} style={{ filter: getFilter("a"), transition: "all 0.3s" }} />
+        {/* b — top-right vertical */}
+        <rect x="58" y="10" width="8" height="44" rx="4" fill={getFill("b")} style={{ filter: getFilter("b"), transition: "all 0.3s" }} />
+        {/* c — bottom-right vertical */}
+        <rect x="58" y="66" width="8" height="44" rx="4" fill={getFill("c")} style={{ filter: getFilter("c"), transition: "all 0.3s" }} />
+        {/* d — bottom horizontal bar */}
+        <rect x="12" y="107" width="46" height="8" rx="4" fill={getFill("d")} style={{ filter: getFilter("d"), transition: "all 0.3s" }} />
+        {/* e — bottom-left vertical */}
+        <rect x="4" y="66" width="8" height="44" rx="4" fill={getFill("e")} style={{ filter: getFilter("e"), transition: "all 0.3s" }} />
+        {/* f — top-left vertical */}
+        <rect x="4" y="10" width="8" height="44" rx="4" fill={getFill("f")} style={{ filter: getFilter("f"), transition: "all 0.3s" }} />
+        {/* g — middle horizontal bar */}
+        <rect x="12" y="56" width="46" height="8" rx="4" fill={getFill("g")} style={{ filter: getFilter("g"), transition: "all 0.3s" }} />
+      </svg>
+
+      {/* Active segments indicator */}
+      <div
+        style={{
+          marginTop: "12px",
+          fontSize: "0.75rem",
+          color: COLORS.high,
+          background: "rgba(0, 255, 136, 0.1)",
+          padding: "4px 12px",
+          borderRadius: "20px",
+          display: "inline-block",
+          fontFamily: "monospace",
+          letterSpacing: "1px",
+          fontWeight: "700",
+          border: "1px solid rgba(0, 255, 136, 0.2)",
+          opacity: activeSegNames.length > 0 ? 1 : 0.4,
+        }}
+      >
+        {activeSegNames.length > 0 ? activeSegNames.join("").toUpperCase() : "OFF"}
       </div>
     </div>
   );

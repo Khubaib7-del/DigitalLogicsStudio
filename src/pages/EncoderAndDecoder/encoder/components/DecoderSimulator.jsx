@@ -49,56 +49,81 @@ const InputToggle = ({ label, value, isActive, onClick, activeColor = COLORS.blu
 const EquationRow = ({ eq, isExpanded, onToggle }) => (
   <div
     style={{
-      borderRadius: "10px",
-      border: `1px solid ${eq.color}30`,
-      background: "rgba(8,14,30,0.7)",
-      marginBottom: "8px",
+      borderRadius: "14px",
+      border: `1px solid ${eq.color}40`,
+      background: COLORS.glassBg,
+      backdropFilter: "blur(10px)",
+      WebkitBackdropFilter: "blur(10px)",
+      marginBottom: "10px",
       overflow: "hidden",
+      transition: "all 0.3s ease",
     }}
   >
     {/* Collapsed header (always visible) */}
-    <button
-      onClick={onToggle}
+    <div
       style={{
         width: "100%",
-        padding: "12px 16px",
-        background: "transparent",
-        border: "none",
+        padding: "14px 18px",
+        background: isExpanded ? `${eq.color}15` : "transparent",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         cursor: "pointer",
+        transition: "background 0.3s",
       }}
+      onClick={onToggle}
     >
-      <div>
-        <span style={{ color: eq.color, fontFamily: "monospace", fontWeight: "700", fontSize: "0.88rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <span style={{ color: eq.color, fontFamily: "monospace", fontWeight: "800", fontSize: "0.9rem" }}>
           {eq.out}
         </span>
-        <span style={{ color: COLORS.textSecondary, fontFamily: "monospace", marginLeft: "12px", fontSize: "0.85rem" }}>
+        <code style={{ color: COLORS.textPrimary, fontFamily: "monospace", fontSize: "0.9rem", opacity: 0.9 }}>
           {eq.eq}
+        </code>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText(eq.eq);
+            alert("Equation copied!");
+          }}
+          style={{
+            padding: "2px 8px",
+            fontSize: "0.65rem",
+            background: "rgba(255,255,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: COLORS.textSecondary,
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontWeight: "700",
+          }}
+        >
+          📋 COPY
+        </button>
+        <span style={{ color: COLORS.textMuted, fontSize: "0.8rem" }}>
+          {isExpanded ? "▲" : "▼"}
         </span>
       </div>
-      <span style={{ color: COLORS.textMuted, fontSize: "0.75rem" }}>
-        {isExpanded ? "▲" : "▼"}
-      </span>
-    </button>
+    </div>
 
     {/* Expanded explanation */}
     {isExpanded && (
-      <div style={{ padding: "0 16px 14px", borderTop: `1px solid ${eq.color}20` }}>
-        <p style={{ color: COLORS.textSecondary, fontSize: "0.86rem", lineHeight: "1.7", margin: "12px 0" }}>
+      <div style={{ padding: "0 18px 18px", borderTop: `1px solid ${eq.color}20` }}>
+        <p style={{ color: COLORS.textSecondary, fontSize: "0.9rem", lineHeight: "1.7", margin: "16px 0" }}>
           {eq.explanation}
         </p>
         <div
           style={{
-            padding: "10px 14px",
-            background: `${eq.color}12`,
-            border: `1px solid ${eq.color}35`,
-            borderRadius: "8px",
+            padding: "12px 16px",
+            background: `${eq.color}15`,
+            border: `1px solid ${eq.color}40`,
+            borderRadius: "10px",
+            boxShadow: `inset 0 0 10px ${eq.color}10`,
           }}
         >
-          <span style={{ color: eq.color, fontSize: "0.78rem", fontWeight: "700" }}>🎯 MEMORY TRICK: </span>
-          <span style={{ color: COLORS.textPrimary, fontSize: "0.82rem" }}>{eq.trick}</span>
+          <span style={{ color: eq.color, fontSize: "0.8rem", fontWeight: "800" }}>🎯 MEMORY TRICK: </span>
+          <span style={{ color: COLORS.textPrimary, fontSize: "0.85rem", opacity: 0.9 }}>{eq.trick}</span>
         </div>
       </div>
     )}
@@ -109,7 +134,7 @@ const EquationRow = ({ eq, isExpanded, onToggle }) => (
 const DecoderSimulator = ({ selectedType, inputVals, setInputVals, types }) => {
   const config = types[selectedType];
   const [expandedEq, setExpandedEq] = useState(null);
-  const [enable, setEnable]         = useState(true);
+  const [enable, setEnable] = useState(true);
 
   const is7seg = selectedType === "BCD7seg";
 
