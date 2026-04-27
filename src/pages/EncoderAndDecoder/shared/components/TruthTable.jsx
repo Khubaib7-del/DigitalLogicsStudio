@@ -15,13 +15,14 @@ import React from "react";
 import { COLORS } from "../theme.js";
 
 const TruthTable = ({ headers, rows, activeRow = -1, inputCount = 1 }) => (
-  <div style={{ overflowX: "auto" }}>
+  <div style={{ overflowX: "auto", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
     <table
       style={{
         width: "100%",
         borderCollapse: "collapse",
         fontFamily: "monospace",
-        fontSize: "0.82rem",
+        fontSize: "0.85rem",
+        background: "rgba(15, 23, 42, 0.3)",
       }}
     >
       {/* ── Header row ── */}
@@ -31,12 +32,15 @@ const TruthTable = ({ headers, rows, activeRow = -1, inputCount = 1 }) => (
             <th
               key={i}
               style={{
-                padding: "8px 14px",
-                background: "rgba(15,23,42,0.9)",
+                padding: "12px 16px",
+                background: "rgba(15,23,42,0.6)",
                 color: i < inputCount ? COLORS.blue : COLORS.warn,
                 textAlign: "center",
-                borderBottom: "1px solid rgba(99,102,241,0.3)",
+                borderBottom: "2px solid rgba(99,102,241,0.2)",
                 fontSize: "0.8rem",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
               }}
             >
               {h}
@@ -54,27 +58,30 @@ const TruthTable = ({ headers, rows, activeRow = -1, inputCount = 1 }) => (
               key={ri}
               style={{
                 background: isActive
-                  ? "rgba(0,255,136,0.08)"
-                  : "transparent",
-                transition: "background 0.2s",
+                  ? "rgba(0,255,136,0.12)"
+                  : ri % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
+                transition: "all 0.3s ease",
+                transform: isActive ? "scale(1.005)" : "none",
+                boxShadow: isActive ? "inset 4px 0 0 " + COLORS.high : "none",
               }}
             >
               {row.map((cell, ci) => (
                 <td
                   key={ci}
                   style={{
-                    padding: "8px 14px",
+                    padding: "10px 16px",
                     textAlign: "center",
-                    borderBottom: "1px solid rgba(30,40,60,0.4)",
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
                     color:
                       isActive
                         ? ci < inputCount
                           ? COLORS.blue
                           : COLORS.high
                         : ci < inputCount
-                        ? COLORS.textMuted
-                        : COLORS.textDim,
-                    fontWeight: isActive ? "700" : "400",
+                          ? COLORS.textSecondary
+                          : COLORS.textMuted,
+                    fontWeight: isActive ? "800" : "400",
+                    textShadow: isActive ? `0 0 8px ${ci < inputCount ? COLORS.blue : COLORS.high}40` : "none",
                   }}
                 >
                   {cell}

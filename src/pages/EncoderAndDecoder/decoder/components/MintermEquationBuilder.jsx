@@ -21,12 +21,12 @@ const makeInputNames = (n) => {
 };
 
 const MintermEquationBuilder = () => {
-  const [numBits,        setNumBits]        = useState(2); // number of address bits
+  const [numBits, setNumBits] = useState(2); // number of address bits
   const [selectedMinterm, setSelectedMinterm] = useState(0); // which output Di to explore
 
   const numOutputs = 1 << numBits;  // 2^numBits
-  const inputs     = makeInputNames(numBits);
-  const binary     = selectedMinterm.toString(2).padStart(numBits, "0");
+  const inputs = makeInputNames(numBits);
+  const binary = selectedMinterm.toString(2).padStart(numBits, "0");
 
   // Build the equation term for each input bit based on address bit value
   const termParts = inputs.map((inp, i) => {
@@ -137,11 +137,31 @@ const MintermEquationBuilder = () => {
       </div>
 
       {/* ── Resulting equation ── */}
-      <div style={{ background: "rgba(251,191,36,0.07)", border: "1px solid rgba(251,191,36,0.3)", borderRadius: "10px", padding: "16px" }}>
+      <div style={{ background: "rgba(251,191,36,0.07)", border: "1px solid rgba(251,191,36,0.3)", borderRadius: "10px", padding: "16px", position: "relative" }}>
         <div style={{ color: COLORS.textSecondary, fontSize: "0.75rem", marginBottom: "6px" }}>RESULTING BOOLEAN EQUATION</div>
-        <code style={{ color: COLORS.warn, fontSize: "1.05rem", fontWeight: "700" }}>
-          D{selectedMinterm} = {equation}
-        </code>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <code style={{ color: COLORS.warn, fontSize: "1.05rem", fontWeight: "700" }}>
+            D{selectedMinterm} = {equation}
+          </code>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`D${selectedMinterm} = ${equation}`);
+              alert("Equation copied to clipboard!");
+            }}
+            style={{
+              padding: "4px 10px",
+              fontSize: "0.7rem",
+              background: "rgba(251,191,36,0.1)",
+              border: "1px solid rgba(251,191,36,0.2)",
+              color: COLORS.warn,
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: "700",
+            }}
+          >
+            📋 COPY
+          </button>
+        </div>
         <p style={{ color: COLORS.textSecondary, fontSize: "0.82rem", marginTop: "10px", lineHeight: "1.6", marginBottom: 0 }}>
           🔑 <strong style={{ color: COLORS.textPrimary }}>Pattern:</strong> Bit=1 in address → use input directly.
           Bit=0 → complement it. AND everything together with E.
