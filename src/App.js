@@ -82,10 +82,6 @@ function App() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  // We can pass toggleTheme down to Navbar via a context or just pass it to Home if needed
-  // For simplicity, we'll just let components use the data-theme attribute for CSS
-  // and we'll add a theme toggle button to the Navbar.
-
   return (
     <div className={`app-root ${theme}`}>
       <BrowserRouter>
