@@ -14,6 +14,7 @@ const FOOTER_COLS = [
     heading: "Learn",
     links: [
       { label: "Sequential Circuits", to: "/sequential/intro" },
+      { label: "Registers & Transfers", to: "/registers/intro" }, // ← NEW
       { label: "Logic Gates", to: "/gates" },
       { label: "Arithmetic", to: "/arithmetic/binary-adders" },
       { label: "Timing Diagrams", to: "/timing-diagrams" },
@@ -57,7 +58,10 @@ export default function Footer() {
       </div>
 
       <div className="home-footer-bottom">
-        <p>© {new Date().getFullYear()} Boolforge — Built for learning digital logic.</p>
+        <p>
+          © {new Date().getFullYear()} Boolforge — Built for learning digital
+          logic.
+        </p>
       </div>
     </footer>
   );

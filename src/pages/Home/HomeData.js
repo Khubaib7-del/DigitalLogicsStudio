@@ -97,6 +97,27 @@ const homeData = [
       },
     ],
   },
+  // ── NEW ──────────────────────────────────────────────────────────
+  {
+    title: "⇌ Registers & Register Transfers",
+    description:
+      "Explore how digital systems store and move data — from basic flip-flop registers to shift registers, counters, and synchronous binary counting circuits.",
+    section: "topics",
+    topicGroup: "circuits",
+    topicOrder: 3,
+    links: [
+      { text: "Registers", to: "/registers/intro" },
+      { text: "Counters", to: "/registers/counters" },
+      { text: "Sync / Async", to: "/registers/sync-async" },
+      { text: "Shift Registers", to: "/registers/shift-registers" },
+      { text: "Serial Shift Registers", to: "/registers/serial-shift" },
+      { text: "Loading Registers", to: "/registers/loading" },
+      { text: "Parallel Registers", to: "/registers/parallel" },
+      { text: "Ripple Counters", to: "/registers/ripple-counters" },
+      { text: "Sync Binary Counters", to: "/registers/sync-binary-counters" },
+    ],
+  },
+  // ────────────────────────────────────────────────────────────────
   {
     title: "🔢 Number Systems",
     description:

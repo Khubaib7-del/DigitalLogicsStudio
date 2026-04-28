@@ -9,6 +9,15 @@ import SignificantDigits from "./pages/SignificantDigits";
 import BCDNotation from "./pages/BCDNotation";
 import ASCIINotation from "./pages/ASCIINotation";
 import BitExtension from "./pages/BitExtension";
+import RegIntro from "./pages/RegistersAndTransfers/RegIntro";
+import RegCounters from "./pages/RegistersAndTransfers/RegCounters";
+import RegSyncAsync from "./pages/RegistersAndTransfers/RegSyncAsync";
+import RegShiftRegisters from "./pages/RegistersAndTransfers/RegShiftRegisters";
+import RegSerialShift from "./pages/RegistersAndTransfers/RegSerialShift";
+import RegLoading from "./pages/RegistersAndTransfers/RegLoading";
+import RegParallel from "./pages/RegistersAndTransfers/RegParallel";
+import RegRippleCounters from "./pages/RegistersAndTransfers/RegRippleCounters";
+import RegSyncBinaryCounters from "./pages/RegistersAndTransfers/RegSyncBinaryCounters";
 
 // UTILS / OTHER TOOLS:
 import ScrollToTop from "./utils/ScrollToTop";
@@ -62,15 +71,15 @@ import SeqStateDiagram from "./pages/SequentialCircuits/SeqStateDiagram";
 import SeqStateReduction from "./pages/SequentialCircuits/SeqStateReduction";
 
 function App() {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   // We can pass toggleTheme down to Navbar via a context or just pass it to Home if needed
@@ -82,7 +91,10 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Home toggleTheme={toggleTheme} theme={theme} />} />
+          <Route
+            path="/"
+            element={<Home toggleTheme={toggleTheme} theme={theme} />}
+          />
           <Route path="/boolforge" element={<Boolforge />} />
           <Route path="/significant-digits" element={<SignificantDigits />} />
           <Route path="/bcd-notation" element={<BCDNotation />} />
@@ -182,6 +194,25 @@ function App() {
           <Route
             path="/sequential/state-reduction"
             element={<SeqStateReduction />}
+          />
+
+          <Route path="/registers/intro" element={<RegIntro />} />
+          <Route path="/registers/counters" element={<RegCounters />} />
+          <Route path="/registers/sync-async" element={<RegSyncAsync />} />
+          <Route
+            path="/registers/shift-registers"
+            element={<RegShiftRegisters />}
+          />
+          <Route path="/registers/serial-shift" element={<RegSerialShift />} />
+          <Route path="/registers/loading" element={<RegLoading />} />
+          <Route path="/registers/parallel" element={<RegParallel />} />
+          <Route
+            path="/registers/ripple-counters"
+            element={<RegRippleCounters />}
+          />
+          <Route
+            path="/registers/sync-binary-counters"
+            element={<RegSyncBinaryCounters />}
           />
         </Routes>
       </BrowserRouter>
