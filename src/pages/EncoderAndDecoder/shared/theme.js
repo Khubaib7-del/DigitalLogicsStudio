@@ -32,6 +32,12 @@ export const COLORS = {
   textSecondary: "#9ca3af",
   textMuted: "#6b7280",
   textDim: "#4b5563",
+
+  // Glassmorphism & Misc
+  glassBg: "rgba(10, 16, 32, 0.4)",
+  glassBorder: "rgba(255, 255, 255, 0.1)",
+  glassShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+  glowShadow: (color) => `0 0 15px ${color}60, 0 0 5px ${color}40`,
 };
 
 // ─── Typography ────────────────────────────────────────────────────────────────
@@ -65,6 +71,19 @@ export const bitIndicatorStyle = (isActive, activeColor = COLORS.high) => ({
  * Returns inline styles for a generic card / panel box.
  * @param {string} accentColor - Border accent color
  */
+/**
+ * Returns inline styles for a glassmorphism card.
+ */
+export const glassCardStyle = (accentColor = COLORS.indigo) => ({
+  background: COLORS.glassBg,
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+  border: `1px solid ${accentColor}40`,
+  borderRadius: "20px",
+  boxShadow: COLORS.glassShadow,
+  overflow: "hidden",
+});
+
 export const cardStyle = (accentColor = COLORS.indigo) => ({
   background: COLORS.cardBg,
   border: `1px solid ${accentColor}30`,

@@ -17,7 +17,7 @@ import TruthTable from "../../shared/components/TruthTable.jsx";
 // ─── Sub: single input toggle button ──────────────────────────────────────────
 const InputToggle = ({ name, isActive, isWinner, onClick }) => {
   const color = isActive ? (isWinner ? COLORS.high : "#f97316") : COLORS.indigoMuted;
-  const bg    = isActive ? (isWinner ? "rgba(0,255,136,0.1)" : "rgba(249,115,22,0.1)") : COLORS.inputBg;
+  const bg = isActive ? (isWinner ? "rgba(0,255,136,0.1)" : "rgba(249,115,22,0.1)") : COLORS.inputBg;
 
   return (
     <button
@@ -41,7 +41,7 @@ const InputToggle = ({ name, isActive, isWinner, onClick }) => {
         {name}
       </span>
       <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        {isWinner  && <span style={{ color: COLORS.high,  fontSize: "0.72rem" }}>👑 WINNER</span>}
+        {isWinner && <span style={{ color: COLORS.high, fontSize: "0.72rem" }}>👑 WINNER</span>}
         {isActive && !isWinner && <span style={{ color: "#f97316", fontSize: "0.72rem" }}>overridden</span>}
         <span style={bitIndicatorStyle(isActive, isWinner ? COLORS.high : "#f97316")}>
           {isActive ? "1" : "0"}
@@ -54,34 +54,76 @@ const InputToggle = ({ name, isActive, isWinner, onClick }) => {
 // ─── Sub: expandable equation row ─────────────────────────────────────────────
 const EquationRow = ({ eq, isExpanded, onToggle }) => (
   <div
-    onClick={onToggle}
     style={{
-      background: "rgba(12,18,35,0.8)",
-      border: `1.5px solid ${isExpanded ? eq.color + "60" : "rgba(99,102,241,0.18)"}`,
-      borderRadius: "10px",
-      padding: "14px 16px",
-      cursor: "pointer",
-      transition: "all 0.2s",
-      marginBottom: "8px",
+      borderRadius: "14px",
+      border: `1px solid ${eq.color}40`,
+      background: COLORS.glassBg,
+      backdropFilter: "blur(10px)",
+      WebkitBackdropFilter: "blur(10px)",
+      marginBottom: "10px",
+      overflow: "hidden",
+      transition: "all 0.3s ease",
     }}
   >
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <code style={{ color: eq.color, fontFamily: "monospace", fontSize: "0.95rem", fontWeight: "700" }}>
-        {eq.eq}
-      </code>
-      <span style={{ color: COLORS.textMuted, fontSize: "0.75rem" }}>
-        {isExpanded ? "▲ less" : "▼ explain"}
-      </span>
+    <div
+      style={{
+        width: "100%",
+        padding: "14px 18px",
+        background: isExpanded ? `${eq.color}15` : "transparent",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        cursor: "pointer",
+      }}
+      onClick={onToggle}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <code style={{ color: eq.color, fontFamily: "monospace", fontSize: "0.95rem", fontWeight: "800" }}>
+          {eq.eq}
+        </code>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText(eq.eq);
+            alert("Equation copied!");
+          }}
+          style={{
+            padding: "2px 8px",
+            fontSize: "0.65rem",
+            background: "rgba(255,255,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: COLORS.textSecondary,
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontWeight: "700",
+          }}
+        >
+          📋 COPY
+        </button>
+        <span style={{ color: COLORS.textMuted, fontSize: "0.8rem" }}>
+          {isExpanded ? "▲" : "▼"}
+        </span>
+      </div>
     </div>
 
     {isExpanded && (
-      <div style={{ marginTop: "14px", borderTop: "1px solid rgba(99,102,241,0.15)", paddingTop: "14px" }}>
-        <p style={{ color: COLORS.textSecondary, fontSize: "0.87rem", lineHeight: "1.7", margin: "0 0 12px" }}>
+      <div style={{ padding: "0 18px 18px", borderTop: `1px solid ${eq.color}20` }}>
+        <p style={{ color: COLORS.textSecondary, fontSize: "0.9rem", lineHeight: "1.7", margin: "16px 0" }}>
           {eq.explanation}
         </p>
-        <div style={{ padding: "10px 14px", background: `${eq.color}12`, border: `1px solid ${eq.color}40`, borderRadius: "8px" }}>
-          <span style={{ color: eq.color, fontSize: "0.78rem", fontWeight: "700" }}>🎯 MEMORY TRICK: </span>
-          <span style={{ color: COLORS.textPrimary, fontSize: "0.82rem" }}>{eq.trick}</span>
+        <div
+          style={{
+            padding: "12px 16px",
+            background: `${eq.color}15`,
+            border: `1px solid ${eq.color}40`,
+            borderRadius: "10px",
+            boxShadow: `inset 0 0 10px ${eq.color}10`,
+          }}
+        >
+          <span style={{ color: eq.color, fontSize: "0.8rem", fontWeight: "800" }}>🎯 MEMORY TRICK: </span>
+          <span style={{ color: COLORS.textPrimary, fontSize: "0.85rem", opacity: 0.9 }}>{eq.trick}</span>
         </div>
       </div>
     )}
